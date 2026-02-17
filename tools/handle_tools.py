@@ -1,12 +1,12 @@
 import json
-from typing import Any
+from typing import Any, Optional
 from data.validations.type_name import type_name
 from error.mcp_error import MCPError
 from tools.tool_definitions import TOOL_DEFINITIONS
 from tools.tool_handlers import TOOL_HANDLERS
 
 
-def handle_initialize(params: dict[str, Any] | None) -> dict[str, Any]:
+def handle_initialize(params: Optional[dict[str, Any]]) -> dict[str, Any]:
     if params is None:
         params = {}
     if not isinstance(params, dict):
@@ -25,7 +25,7 @@ def handle_initialize(params: dict[str, Any] | None) -> dict[str, Any]:
     }
 
 
-def handle_tools_list(params: dict[str, Any] | None) -> dict[str, Any]:
+def handle_tools_list(params: Optional[dict[str, Any]]) -> dict[str, Any]:
     if params is None:
         params = {}
     if not isinstance(params, dict):
@@ -37,7 +37,7 @@ def handle_tools_list(params: dict[str, Any] | None) -> dict[str, Any]:
     return {"tools": TOOL_DEFINITIONS}
     
 
-def handle_tools_call(params: dict[str, Any] | None) -> dict[str, Any]:
+def handle_tools_call(params: Optional[dict[str, Any]]) -> dict[str, Any]:
     if not isinstance(params, dict):
         raise MCPError(
             -32602,

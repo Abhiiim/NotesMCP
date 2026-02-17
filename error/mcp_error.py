@@ -1,12 +1,12 @@
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, Optional
 
 
 @dataclass
 class MCPError(Exception):
     code: int
     message: str
-    data: dict[str, Any] | None = None
+    data: Optional[dict[str, Any]] = None
 
     def to_error_object(self) -> dict[str, Any]:
         error: dict[str, Any] = {"code": self.code, "message": self.message}
