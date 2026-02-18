@@ -6,6 +6,9 @@ Tool-only MCP server that provides persistent notes storage via SQLite.
 
 - `add_note`
 - `list_notes`
+- `get_note`
+- `update_note`
+- `delete_note`
 - `search_notes`
 
 No resources and no prompts are exposed.
@@ -13,7 +16,7 @@ No resources and no prompts are exposed.
 ## Run
 
 ```bash
-python3.11 /Users/akeshibh/Desktop/NotesMCP/notes_mcp_server.py
+python3.11 /Users/akeshibh/Desktop/NotesMCP/server.py
 ```
 
 The server stores data at:
@@ -119,6 +122,92 @@ The server stores data at:
         }
       }
     }
+  }
+}
+```
+
+`get_note` input:
+
+```json
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 }
+  }
+}
+```
+
+`get_note` output:
+
+```json
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "title", "content", "created_at"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "content": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" }
+  }
+}
+```
+
+`update_note` input:
+
+```json
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "title", "content"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "content": { "type": "string" }
+  }
+}
+```
+
+`update_note` output:
+
+```json
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "title", "content", "created_at"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "content": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" }
+  }
+}
+```
+
+`delete_note` input:
+
+```json
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 }
+  }
+}
+```
+
+`delete_note` output:
+
+```json
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 }
   }
 }
 ```
